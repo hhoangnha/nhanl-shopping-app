@@ -26,11 +26,12 @@ const ProductCard: React.FC<Props> = ({item}) => {
   });
 
   const clickHeart = () => {
-    if (favorite) {
-      progress.value = withTiming(1, {duration: 300});
+    let tmp = !favorite;
+    if (tmp) {
+      progress.value = withTiming(1, {duration: 100});
       scale.value = withTiming(1.4);
     } else {
-      progress.value = withTiming(0.2, {duration: 300});
+      progress.value = withTiming(0.2, {duration: 100});
       scale.value = withTiming(1);
     }
     setFavorite(!favorite);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ScrollView} from 'react-native';
 import {View, Text, TouchableOpacity} from 'react-native-ui-lib';
-import Animated, {FadeInUp} from 'react-native-reanimated';
+import Animated, {BounceInLeft} from 'react-native-reanimated';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import ViewContainer from '../../components/ViewContainer';
@@ -73,13 +73,13 @@ const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
   return (
     <ViewContainer>
       <Header
-        background="transparent"
+        background={colors.trans}
         left={<Text>HOME</Text>}
         right={
           <View style={styles.headerRightSearch}>
             <TouchableOpacity
               marginR-5
-              backgroundColor="white"
+              backgroundColor={colors.white}
               br50
               padding-5
               style={styles.rightSearchItem}
@@ -87,7 +87,7 @@ const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
               <Image style={styles.headIcon} source={Icons.BELL} />
             </TouchableOpacity>
             <TouchableOpacity
-              backgroundColor="white"
+              backgroundColor={colors.white}
               br50
               padding-5
               style={styles.rightSearchItem}
@@ -97,42 +97,42 @@ const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
           </View>
         }
       />
-      <ScrollView nestedScrollEnabled={false}>
-        <Animated.View entering={FadeInUp}>
-          {/* search */}
-          <View width={'100%'} row center marginT-5>
-            <View width={'80%'}>
-              <Input
-                placeholder="Search"
-                value={'search'}
-                background={'white'}
-                onChangeText={(value: string) => console.log(value)}
-                small
-                rightIcon={
-                  <View marginR-10>
-                    <Image source={Icons.SEARCH} style={styles.headIcon} />
-                  </View>
-                }
-              />
-            </View>
-            <View
-              width={'10%'}
-              center
-              marginL-10
-              br10
-              backgroundColor={colors.danger}
-              padding-10>
-              <TouchableOpacity>
-                <Image source={Icons.SORT_MENU} />
-              </TouchableOpacity>
-            </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* search */}
+        <View width={'100%'} row center marginT-5>
+          <View width={'80%'}>
+            <Input
+              placeholder="Search"
+              value={'search'}
+              background={'white'}
+              onChangeText={(value: string) => console.log(value)}
+              small
+              rightIcon={
+                <View marginR-10>
+                  <Image source={Icons.SEARCH} style={styles.headIcon} />
+                </View>
+              }
+            />
           </View>
-          {/* search */}
+          <View
+            width={'10%'}
+            center
+            marginL-10
+            br10
+            backgroundColor={colors.danger}
+            padding-10>
+            <TouchableOpacity>
+              <Image source={Icons.SORT_MENU} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        {/* search */}
 
-          {/* carousel  */}
-          <Carousel data={dummyData} />
-          {/* carousel  */}
+        {/* carousel  */}
+        <Carousel data={dummyData} />
+        {/* carousel  */}
 
+        <Animated.View entering={BounceInLeft}>
           {/* CarouselCategories  */}
           <CarouselCategories
             data={categoriesData}
@@ -140,9 +140,10 @@ const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
             setTabCategories={setTabCategories}
           />
           {/* CarouselCategories  */}
-
-          <ProductBox data={dummyData} />
         </Animated.View>
+        {/* productbox  */}
+        <ProductBox data={dummyData} />
+        {/* productbox  */}
       </ScrollView>
     </ViewContainer>
   );

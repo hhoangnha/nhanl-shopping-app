@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Image from 'react-native-fast-image';
 import HomeContainer from '../screens/Home/HomeContainer';
@@ -10,8 +9,13 @@ const HomeTab: React.FC<{}> = ({}) => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName = 'home';
+        tabBarShowLabel: false,
+        tabBarIcon: (
+          {
+            // focused, color, size
+          },
+        ) => {
+          let iconName = Icons.HOME;
 
           switch (route.name) {
             case 'Home':
@@ -22,11 +26,11 @@ const HomeTab: React.FC<{}> = ({}) => {
             case 'Sale':
               iconName = 'book';
               break;
-            case 'User':
-              iconName = 'user';
+            case 'Setting':
+              iconName = Icons.SETTING;
               break;
           }
-          return <Image source={Icons.HOME} style={{width: 20, height: 20}} />;
+          return <Image source={iconName} style={{width: 20, height: 20}} />;
         },
       })}>
       <Tab.Screen
@@ -36,7 +40,7 @@ const HomeTab: React.FC<{}> = ({}) => {
       />
       <Tab.Screen name="Product" component={HomeContainer} />
       <Tab.Screen name="Sale" component={HomeContainer} />
-      <Tab.Screen name="User" component={HomeContainer} />
+      <Tab.Screen name="Setting" component={HomeContainer} />
     </Tab.Navigator>
   );
 };
