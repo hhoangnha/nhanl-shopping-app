@@ -68,8 +68,13 @@ const categoriesData = [
 export interface Props {
   tabCategories: any;
   setTabCategories: Function;
+  goProductDetail: Function;
 }
-const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
+const HomeScreen: React.FC<Props> = ({
+  tabCategories,
+  setTabCategories,
+  goProductDetail,
+}) => {
   return (
     <ViewContainer>
       <Header
@@ -129,7 +134,7 @@ const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
         {/* search */}
 
         {/* carousel  */}
-        <Carousel data={dummyData} />
+        <Carousel data={dummyData} small />
         {/* carousel  */}
 
         <Animated.View entering={BounceInLeft}>
@@ -141,8 +146,13 @@ const HomeScreen: React.FC<Props> = ({tabCategories, setTabCategories}) => {
           />
           {/* CarouselCategories  */}
         </Animated.View>
+
         {/* productbox  */}
-        <ProductBox data={dummyData} />
+        <ProductBox
+          title="Dành cho bạn"
+          data={dummyData}
+          onPress={goProductDetail}
+        />
         {/* productbox  */}
       </ScrollView>
     </ViewContainer>

@@ -1,39 +1,41 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Dimensions, FlatList, Animated} from 'react-native';
 import {View} from 'react-native-ui-lib';
+import colors from '../styles/colors';
 import CarouselItem from './CarouselItem';
 
 const {width} = Dimensions.get('window');
 
-function infiniteScroll(dataList: any) {
-  const numberOfData = dataList.length;
-  let scrollValue = 0,
-    scrolled = 0;
+// function infiniteScroll(dataList: any) {
+//   const numberOfData = dataList.length;
+//   let scrollValue = 0,
+//     scrolled = 0;
 
-  setInterval(function () {
-    scrolled++;
-    if (scrolled < numberOfData) {
-      scrollValue = scrollValue + width;
-    } else {
-      scrollValue = 0;
-      scrolled = 0;
-    }
+//   setInterval(function () {
+//     scrolled++;
+//     if (scrolled < numberOfData) {
+//       scrollValue = scrollValue + width;
+//     } else {
+//       scrollValue = 0;
+//       scrolled = 0;
+//     }
 
-    this.flatList.scrollToOffset({animated: true, offset: scrollValue});
-  }, 5000);
-}
+//     flatList.scrollToOffset({animated: true, offset: scrollValue});
+//   }, 5000);
+// }
 
 interface Props {
   data: Array<object>;
+  small?: true | false;
 }
-const Carousel: React.FC<Props> = ({data}) => {
+const Carousel: React.FC<Props> = ({data, small}) => {
   const scrollX = new Animated.Value(0);
   let position = Animated.divide(scrollX, width);
   const [dataList, setDataList] = useState(data);
 
   useEffect(() => {
     setDataList(data);
-    infiniteScroll(dataList);
+    // infiniteScroll(dataList);
   }, [data, dataList]);
 
   if (data && data.length) {
@@ -53,7 +55,7 @@ const Carousel: React.FC<Props> = ({data}) => {
           decelerationRate={'fast'}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => {
-            return <CarouselItem item={item} />;
+            return <CarouselItem item={item} small={small} />;
           }}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollX}}}],
@@ -61,7 +63,7 @@ const Carousel: React.FC<Props> = ({data}) => {
           )}
         />
 
-        <View row center>
+        <View row center style={styles.boxDot}>
           {data.map((_, i) => {
             let opacity = position.interpolate({
               inputRange: [i - 1, i, i + 1],
@@ -80,10 +82,15 @@ const Carousel: React.FC<Props> = ({data}) => {
 };
 
 const styles = StyleSheet.create({
+  boxDot: {
+    position: 'absolute',
+    bottom: 10,
+    left: 20,
+  },
   dot: {
     height: 5,
     width: 5,
-    backgroundColor: '#595959',
+    backgroundColor: colors.white,
     margin: 8,
     borderRadius: 5,
   },

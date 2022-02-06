@@ -1,8 +1,11 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {StackNavigatorParamsList} from './types';
 import HomeTab from './HomeTab';
-const Stack = createStackNavigator<any>();
+import ProductDetailContainer from '../screens/ProductDetail/ProductDetailContainer';
+
+const Stack = createStackNavigator<StackNavigatorParamsList>();
 const RootNavigation: React.FC<{}> = ({}) => {
   return (
     <NavigationContainer>
@@ -10,7 +13,8 @@ const RootNavigation: React.FC<{}> = ({}) => {
         screenOptions={() => ({
           headerShown: false,
         })}>
-        <Stack.Screen name="HomeTab" component={HomeTab} />
+        <Stack.Screen name="Home" component={HomeTab} />
+        <Stack.Screen name="ProductDetail" component={ProductDetailContainer} />
       </Stack.Navigator>
     </NavigationContainer>
   );

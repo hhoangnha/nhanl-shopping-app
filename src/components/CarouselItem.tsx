@@ -3,15 +3,22 @@ import {StyleSheet, Dimensions} from 'react-native';
 import {View, Text} from 'react-native-ui-lib';
 import Image from 'react-native-fast-image';
 const {width, height} = Dimensions.get('window');
-
 interface Props {
   item: any;
+  small: any;
 }
-const CarouselItem: React.FC<Props> = ({item}) => {
+const CarouselItem: React.FC<Props> = ({item, small}) => {
   return (
-    <View style={styles.cardView}>
+    <View
+      style={[
+        styles.cardView,
+        small ? {height: height / 5} : {height: height / 3},
+      ]}>
       <Image
-        style={styles.image}
+        style={[
+          styles.image,
+          small ? {height: height / 5} : {height: height / 3},
+        ]}
         source={{uri: item.url, priority: Image.priority.high}}
         resizeMode={Image.resizeMode.cover}
       />
@@ -27,7 +34,6 @@ const styles = StyleSheet.create({
   cardView: {
     flex: 1,
     width: width - 20,
-    height: height / 5,
     backgroundColor: 'white',
     margin: 10,
     borderRadius: 10,
@@ -41,7 +47,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width - 20,
-    height: height / 5,
+    // height: height / 3,
     borderRadius: 10,
   },
   itemTitle: {

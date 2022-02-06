@@ -7,7 +7,7 @@ interface Props {
   label?: string;
   background?: string;
   color?: string;
-  onPress: any;
+  onPress: () => void;
 }
 const ButtonRounder: React.FC<Props> = ({
   label,

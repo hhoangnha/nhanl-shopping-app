@@ -8,13 +8,22 @@ interface Props {
   background?: string;
   color?: string;
   onPress: () => void;
+  radius: number;
+  width: string;
 }
-const ButtonCustom: React.FC<Props> = ({label, background, color, onPress}) => {
+const ButtonCustom: React.FC<Props> = ({
+  label,
+  background,
+  color,
+  radius,
+  width,
+  onPress,
+}) => {
   return (
     // <View style={[styles.container]} backgroundColor={background}>
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.container]}
+      style={[{borderRadius: radius, width: width}]}
       backgroundColor={background}>
       <View row center spread style={[styles.boxButton]}>
         <View row centerV>
@@ -28,13 +37,13 @@ const ButtonCustom: React.FC<Props> = ({label, background, color, onPress}) => {
   );
 };
 
+ButtonCustom.defaultProps = {
+  radius: 0,
+  width: '100%',
+};
+
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    borderRadius: 8,
-  },
   boxButton: {
-    borderRadius: 8,
     paddingLeft: 30,
     paddingRight: 30,
     padding: 14,

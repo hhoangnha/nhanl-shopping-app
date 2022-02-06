@@ -4,6 +4,7 @@ export const Icons = {
   BELL: require('../../assets/icons/icons8-bell-32.png'),
   HOME: require('../../assets/icons/home.png'),
   SETTING: require('../../assets/icons/settings.png'),
+  BACK: require('../../assets/icons/back.png'),
 
   SORT_MENU: require('../../assets/icons/apps-sort.png'),
   MEN_SHOES: require('../../assets/icons/shoe.png'),

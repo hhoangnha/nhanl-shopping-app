@@ -18,7 +18,7 @@ const HomeTab: React.FC<{}> = ({}) => {
           let iconName = Icons.HOME;
 
           switch (route.name) {
-            case 'Home':
+            case 'HomeTab':
               break;
             case 'Product':
               iconName = 'search1';
@@ -34,7 +34,7 @@ const HomeTab: React.FC<{}> = ({}) => {
         },
       })}>
       <Tab.Screen
-        name="Home"
+        name="HomeTab"
         component={HomeContainer}
         // options={{tabBarBadge: 3}}
       />
